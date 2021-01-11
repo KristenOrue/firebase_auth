@@ -36,6 +36,16 @@ body {
   color: white;
 }
 
+.button-signup {
+  background-color: black;
+  margin: 10px auto;
+  /* margin-inline: 50px; */
+  width: 100px; 
+  height: 40px; 
+  color: white;
+
+}
+
 .button-google {
   background-color: lightskyblue;
   margin: 10px auto;

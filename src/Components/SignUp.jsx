@@ -37,44 +37,37 @@ const SignUp = () => {
 
   return (
     <div className="mt-8">
-      <h1 className="text-3xl mb-2 text-center font-bold">Sign Up</h1>
-      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+      <h1 className="text">Sign Up</h1>
+      <div className="container">
         {error !== null && (
-          <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
+          <div className="error">
             {error}
           </div>
         )}
         <form className="">
-          <label htmlFor="displayName" className="block">
-            Display Name:
-          </label>
           <input
             type="text"
-            className="my-1 p-1 w-full "
+            className="signin-field"
             name="displayName"
             value={displayName}
-            placeholder="Name"
+            placeholder="Your Name"
             id="displayName"
             onChange={event => onChangeHandler(event)}
           />
-          <label htmlFor="Email" className="block">
-            Email:
-          </label>
+
           <input
             type="email"
-            className="my-1 p-1 w-full"
+            className="signin-field"
             name="userEmail"
             value={email}
-            placeholder="E.g: faruq123@gmail.com"
+            placeholder="Create a Password"
             id="userEmail"
             onChange={event => onChangeHandler(event)}
           />
-          <label htmlFor="userPassword" className="block">
-            Password:
-          </label>
+
           <input
             type="password"
-            className="mt-1 mb-3 p-1 w-full"
+            className="signin-field"
             name="userPassword"
             value={password}
             placeholder="Your Password"
@@ -82,7 +75,7 @@ const SignUp = () => {
             onChange={event => onChangeHandler(event)}
           />
           <button
-            className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
+            className="button-signup"
             onClick={event => {
               createUserWithEmailAndPasswordHandler(event, email, password);
             }}
@@ -90,7 +83,8 @@ const SignUp = () => {
             Sign up
           </button>
         </form>
-        <p className="text-center my-3">or</p>
+        {/* <p className="button-google">or</p> */}
+        <p className="text">or</p>
         <button
           onClick={() => {
             try {
@@ -99,7 +93,7 @@ const SignUp = () => {
               console.error("Error signing in with Google", error);
             }
           }}
-          className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
+          className="button-google"
         >
           Sign In with Google
         </button>

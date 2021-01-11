@@ -92,7 +92,7 @@ const SignIn = () => { //Has three pieces of state:
         <button className="button-email" id="signup-button" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
             SignUp
         </button>
-        <button className = "button-signout" id="signout-button" onClick = {(event) => {signOutHandler(event)}}>Sign out</button>
+        <button className = "button-email" id="signout-button" onClick = {(event) => {signOutHandler(event)}}>Log out</button>
         </div>
 
         <button
