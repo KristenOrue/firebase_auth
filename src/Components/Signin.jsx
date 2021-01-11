@@ -21,11 +21,6 @@ const SignIn = () => { //Has three pieces of state:
                   document.getElementById('links').style.display = 'none';
 
                   document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
-                  // document.getElementById('userInfo').innerHTML = document.getElementById('userEmail').value;
-                  // document.getElementById('email').value;
-                  // document.getElementById('title').style.display = 'inline-block';
-                  // document.getElementById('userInfo').style.display = 'inline-block';
-                  // document.getElementById('userInfo').innerHTML = document.getElementById('userEmail').value;
                   document.getElementById('signout-button').style.display = 'inline-block';
                 })
                 .catch(error => {
