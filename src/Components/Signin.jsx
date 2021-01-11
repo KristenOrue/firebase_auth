@@ -47,10 +47,6 @@ const SignIn = () => { //Has three pieces of state:
 
           document.getElementById('message').innerHTML = "Sign In";
           alert("Signed Out Successfully");
-          // document.getElementById('email').value;
-          // document.getElementById('title').style.display = 'inline-block';
-          // document.getElementById('userInfo').style.display = 'inline-block';
-          // document.getElementById('userInfo').innerHTML = document.getElementById('email').value;
           document.getElementById('signout-button').style.display = 'none';
         });
 
