@@ -36,9 +36,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="container">
       <h1 className="text">Sign Up</h1>
-      <div className="container">
+      <div className="">
         {error !== null && (
           <div className="error">
             {error}
