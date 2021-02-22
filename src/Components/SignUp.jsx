@@ -4,9 +4,9 @@ import { auth, signInWithGoogle, generateUserDocument } from "../firebase";
 import SignIn from "./SignIn";
 
 const SignUp = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [displayName, setDisplayName] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [error, setError] = useState(null);
 
     const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
@@ -80,8 +80,7 @@ const SignUp = () => {
             className="button-in-signup"
             onClick={event => {
               createUserWithEmailAndPasswordHandler(event, email, password);
-            }}
-          >
+            }}>
             Sign up
           </button>
           </div>

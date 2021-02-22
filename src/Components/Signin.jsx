@@ -47,7 +47,25 @@ const SignIn = () => { //Has three pieces of state:
           document.getElementById('signout-button').style.display = 'none';
         });
       }
+      const createUserWithEmailAndPasswordHandler = 
+      (event, email, password) => {
+          event.preventDefault();
+          auth.createUserWithEmailAndPassword(email, password).then((user) => {
+            document.getElementById('userEmail').style.display = 'none';
+            document.getElementById('userPassword').style.display = 'none';
+            document.getElementById('signin-button').style.display = 'none';
+            document.getElementById('signup-button').style.display = 'none';
+            document.getElementById('google-button').style.display = 'none';
+            document.getElementById('links').style.display = 'none';
 
+            document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
+            document.getElementById('signout-button').style.display = 'inline-block';
+          })
+          .catch(error => {
+            setError("Error signing in with password and email!");
+              console.error("Error signing in with password and email", error);
+          });
+};
     const onChangeHandler = (event) => {
         const {name, value} = event.currentTarget;
 
@@ -95,7 +113,9 @@ const SignIn = () => { //Has three pieces of state:
         </button>
 
         <button className="button-email" id="signup-button" 
-        onClick={SignUp}>
+        onClick={(event) => {
+          createUserWithEmailAndPasswordHandler(event, email, password)
+        }}>
           Sign Up     
         </button>
         <button className = "button-email" id="signout-button" onClick = {(event) => {signOutHandler(event)}}>Log out</button>
