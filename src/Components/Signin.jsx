@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import { Link } from "@reach/router";
 import { signInWithGoogle } from "../firebase";
 import { auth } from "../firebase";
+import SignUp from "./SignUp";
+
 
 
 const SignIn = () => { //Has three pieces of state:
@@ -10,7 +12,7 @@ const SignIn = () => { //Has three pieces of state:
     const [error, setError] = useState(null);//For displaying error message 
 
     const signInWithEmailAndPasswordHandler = 
-            (event,email, password) => {
+            (event, email, password) => {
                 event.preventDefault();
                 auth.signInWithEmailAndPassword(email, password).then((user) => {
                   document.getElementById('userEmail').style.display = 'none';
@@ -44,7 +46,6 @@ const SignIn = () => { //Has three pieces of state:
           alert("Signed Out Successfully");
           document.getElementById('signout-button').style.display = 'none';
         });
-
       }
 
     const onChangeHandler = (event) => {
@@ -86,11 +87,16 @@ const SignIn = () => { //Has three pieces of state:
         </form>
 
         <div className="signin-signup-buttons">
-        <button className="button-email" id="signin-button"onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+        <button className="button-email" id="signin-button"
+        onClick = {(event) => {
+          signInWithEmailAndPasswordHandler(event, email, password)
+          }}>
             Sign In
         </button>
-        <button className="button-email" id="signup-button" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
-            SignUp
+
+        <button className="button-email" id="signup-button" 
+        onClick={SignUp}>
+          Sign Up     
         </button>
         <button className = "button-email" id="signout-button" onClick = {(event) => {signOutHandler(event)}}>Log out</button>
         </div>
@@ -106,10 +112,13 @@ const SignIn = () => { //Has three pieces of state:
           className="button-google" id="google-button">
           Sign in with Google
         </button>
+
         <p className="text-center my-3" id="links">
           Don't have an account?{" "}
           {/*Link component that Reach Router provides:similar to the anchor element in HTML, 
           and similar in function to the href attribute of the anchor element.*/}
+
+
           <Link to="signUp" className="text-blue-500 hover:text-blue-600" id="signup-link"> 
             Sign up here
           </Link>{" "}

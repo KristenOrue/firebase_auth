@@ -1,39 +1,40 @@
 import React, { useContext, useState } from "react";
 import { Link } from "@reach/router";
 import { auth, signInWithGoogle, generateUserDocument } from "../firebase";
+import SignIn from "./SignIn";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [error, setError] = useState(null);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [displayName, setDisplayName] = useState("");
+    const [error, setError] = useState(null);
 
-  const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
-    event.preventDefault();
-    try{
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {displayName});
-    }
-    catch(error){
-      setError('Error Signing up with email and password');
-    }
-      
-    setEmail("");
-    setPassword("");
-    setDisplayName("");
-  };
+    const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
+      event.preventDefault();
+      try{
+        const {user} = await auth.createUserWithEmailAndPassword(email, password);
+        generateUserDocument(user, {displayName});
+      }
+      catch(error){
+        setError('Error Signing up with email and password');
+      }
+        
+      setEmail("");
+      setPassword("");
+      setDisplayName("");
+    };
 
-  const onChangeHandler = event => {
-    const { name, value } = event.currentTarget;
+    const onChangeHandler = event => {
+      const { name, value } = event.currentTarget;
 
-    if (name === "userEmail") {
-      setEmail(value);
-    } else if (name === "userPassword") {
-      setPassword(value);
-    } else if (name === "displayName") {
-      setDisplayName(value);
-    }
-  };
+      if (name === "userEmail") {
+        setEmail(value);
+      } else if (name === "userPassword") {
+        setPassword(value);
+      } else if (name === "displayName") {
+        setDisplayName(value);
+      }
+    };
 
   return (
     <div className="container">
@@ -74,14 +75,16 @@ const SignUp = () => {
             id="userPassword"
             onChange={event => onChangeHandler(event)}
           />
+          <div>
           <button
-            className="button-signup"
+            className="button-in-signup"
             onClick={event => {
               createUserWithEmailAndPasswordHandler(event, email, password);
             }}
           >
             Sign up
           </button>
+          </div>
         </form>
         {/* <p className="button-google">or</p> */}
         <p className="text">or</p>

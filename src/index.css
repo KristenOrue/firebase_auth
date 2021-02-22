@@ -30,7 +30,7 @@ body {
 .button-email {
   background-color: black;
   margin: 10px auto;
-  margin-inline: 50px;
+  /* margin-inline: 50px; */
   width: 100px; 
   height: 40px; 
   color: white;
@@ -43,7 +43,15 @@ body {
   width: 100px; 
   height: 40px; 
   color: white;
+}
 
+.button-in-signup {
+  background-color: black;
+  margin: 10px auto;
+  text-align: center;
+  width: 100px; 
+  height: 40px; 
+  color: white;
 }
 
 .button-google {
