@@ -29,10 +29,17 @@ const SignIn = () => { //Has three pieces of state:
                   Http.open("GET", url);
                   Http.send();
                   Http.onreadystatechange = (e) => {
-                    console.log(Http.responseText)
                     const obj = JSON.parse(Http.responseText);
+                    // console.log(Http.responseText)
                     document.getElementById('song').style.display = 'inline-block';
-                    document.getElementById('song').innerHTML = obj[0].Key;
+                    obj.forEach(function (item) {
+                      console.log(item.Key);
+                      var song = document.createElement("LI");
+                      song.innerHTML = item.Key;                 
+                      document.getElementById('song').appendChild(song);
+                    });
+                    document.getElementById('song').style.display = 'inline-block';
+                    // document.getElementById('song').innerHTML = obj[0].Key;
                   }
                 })
                 .catch(error => {
@@ -90,7 +97,7 @@ const SignIn = () => { //Has three pieces of state:
   return (
     <div className="container">
       <h1 id="message">Sign In</h1>
-      <h2 id="song"></h2>
+      <ul id="song"></ul>
       <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
         {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
         <form className="">
