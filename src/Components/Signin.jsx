@@ -24,6 +24,16 @@ const SignIn = () => { //Has three pieces of state:
 
                   document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
                   document.getElementById('signout-button').style.display = 'inline-block';
+                  const Http = new XMLHttpRequest();
+                  const url='https://v7tzwh82s8.execute-api.us-east-1.amazonaws.com/s3file';
+                  Http.open("GET", url);
+                  Http.send();
+                  Http.onreadystatechange = (e) => {
+                    console.log(Http.responseText)
+                    const obj = JSON.parse(Http.responseText);
+                    document.getElementById('song').style.display = 'inline-block';
+                    document.getElementById('song').innerHTML = obj[0].Key;
+                  }
                 })
                 .catch(error => {
                   setError("Error signing in with password and email!");
@@ -80,6 +90,7 @@ const SignIn = () => { //Has three pieces of state:
   return (
     <div className="container">
       <h1 id="message">Sign In</h1>
+      <h2 id="song"></h2>
       <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
         {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
         <form className="">
