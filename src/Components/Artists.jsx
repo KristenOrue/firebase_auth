@@ -31,6 +31,9 @@ const Artists = () => { //Has three pieces of state:
     return (
         <div className="">
         <h1 className="text">Artists</h1>
+        <Link to="/">
+            <button type="button" className="logout-artist-button">Log Out</button>
+        </Link>
         <div className="container">
             {error !== null && (
             <div className="error">
@@ -44,11 +47,6 @@ const Artists = () => { //Has three pieces of state:
             autoPlay
             controls
             />
-
-
-        <Link to="/">
-            <button type="button" className="button-email">Log Out</button>
-        </Link>
         </div>
         </div>
     );

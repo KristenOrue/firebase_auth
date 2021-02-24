@@ -25,6 +25,8 @@ const SignIn = () => { //Has three pieces of state:
                   document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
                   document.getElementById('logout-button').style.display = 'inline-block';
                   document.getElementById('artists-button').style.display = 'inline-block';
+                  document.getElementById('songs-button').style.display = 'inline-block';
+
                 })
 
                 .catch(error => {
@@ -48,6 +50,7 @@ const SignIn = () => { //Has three pieces of state:
           alert("Signed Out Successfully");
           document.getElementById('logout-button').style.display = 'none';
           document.getElementById('artists-button').style.display = 'none';
+          document.getElementById('songs-button').style.display = 'none';
 
         });
       }
@@ -128,8 +131,11 @@ const SignIn = () => { //Has three pieces of state:
         </button> */}
         {/* <button className = "button-email" id="artists-button" onClick = {this.onArtists}>Artists</button> */}
         <div className = "button-group">
-          <Link to="Artists" className="button-email" id="artists-button">
-              <button className="button-email" id="artists-button">Artists</button>
+          <Link to="/Artists" className="button-email">
+              <button type="button" className="button-email" id="artists-button">Artists</button>
+            </Link>{" "}
+          <Link to="/Songs" className="button-email">
+              <button type="button" className="button-email" id="songs-button">Songs</button>
             </Link>{" "}
           </div> 
         </div>
