@@ -1,0 +1,57 @@
+import React, { useState, useContext } from "react";
+import { auth } from "../firebase";
+import SignIn from "./SignIn";
+import { Link, isRedirect, Redirect} from "@reach/router";
+import ReactAudioPlayer from 'react-audio-player';
+
+
+
+const Artists = () => { //Has three pieces of state:
+    const [error, setError] = useState(null);//For displaying error message 
+
+
+    const Http = new XMLHttpRequest();
+    const url='https://tw0uqnivkf.execute-api.us-east-1.amazonaws.com/s3file';
+    Http.open("GET", url);
+    Http.send();
+    Http.onreadystatechange = (e) => {
+      if (Http.readyState == 4) {
+        console.log("Print once");
+        const obj = JSON.parse(Http.responseText);
+        document.getElementById('song').style.display = 'inline-block';
+        obj.forEach(function (item) {
+          console.log(item.Key);
+          var song = document.createElement("BUTTON");
+          song.innerHTML = item.Key;                 
+          document.getElementById('song').appendChild(song);
+        });
+      }
+    }
+
+    return (
+        <div className="">
+        <h1 className="text">Artists</h1>
+        <div className="container">
+            {error !== null && (
+            <div className="error">
+                {error}
+            </div>
+            )}
+            <button id="song"> </button>
+
+            <ReactAudioPlayer
+            src="my_audio_file.ogg"
+            autoPlay
+            controls
+            />
+
+
+        <Link to="/">
+            <button type="button" className="button-email">Log Out</button>
+        </Link>
+        </div>
+        </div>
+    );
+};
+
+export default Artists;

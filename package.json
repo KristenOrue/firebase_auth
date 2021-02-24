@@ -12,6 +12,7 @@
     "firebase-admin": "^9.4.2",
     "firebase-functions": "^3.13.0",
     "react": "^17.0.1",
+    "react-audio-player": "^0.14.0",
     "react-dom": "^17.0.1",
     "react-router": "^3.0.0",
     "react-router-config": "^5.1.1",

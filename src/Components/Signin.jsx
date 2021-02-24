@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import { Link } from "@reach/router";
+import { Link, Redirect } from "@reach/router";
 import { signInWithGoogle } from "../firebase";
 import { auth } from "../firebase";
-import SignUp from "./SignUp";
+import Artists from "./Artists";
 
 
 
@@ -23,35 +23,8 @@ const SignIn = () => { //Has three pieces of state:
                   document.getElementById('links').style.display = 'none';
 
                   document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
-                  document.getElementById('signout-button').style.display = 'inline-block';
-                  const Http = new XMLHttpRequest();
-                  const url='https://tw0uqnivkf.execute-api.us-east-1.amazonaws.com/s3file';
-                  Http.open("GET", url);
-                  Http.send();
-                  Http.onreadystatechange = (e) => {
-                    if (Http.readyState == 4) {
-                      console.log("Print once");
-                      const obj = JSON.parse(Http.responseText);
-                      document.getElementById('song').style.display = 'inline-block';
-                      obj.forEach(function (item) {
-                        console.log(item.Key);
-                        var song = document.createElement("LI");
-                        song.innerHTML = item.Key;                 
-                        document.getElementById('song').appendChild(song);
-                      });
-                    }
-                    // const obj = JSON.parse(Http.responseText);
-                    // // console.log(Http.responseText)
-                    // document.getElementById('song').style.display = 'inline-block';
-                    // obj.forEach(function (item) {
-                    //   console.log(item.Key);
-                    //   var song = document.createElement("LI");
-                    //   song.innerHTML = item.Key;                 
-                    //   document.getElementById('song').appendChild(song);
-                    // });
-                    // document.getElementById('song').style.display = 'inline-block';
-                    // // document.getElementById('song').innerHTML = obj[0].Key;
-                  }
+                  document.getElementById('logout-button').style.display = 'inline-block';
+                  document.getElementById('artists-button').style.display = 'inline-block';
                 })
 
                 .catch(error => {
@@ -73,28 +46,30 @@ const SignIn = () => { //Has three pieces of state:
 
           document.getElementById('message').innerHTML = "Sign In";
           alert("Signed Out Successfully");
-          document.getElementById('signout-button').style.display = 'none';
+          document.getElementById('logout-button').style.display = 'none';
+          document.getElementById('artists-button').style.display = 'none';
+
         });
       }
-      const createUserWithEmailAndPasswordHandler = 
-      (event, email, password) => {
-          event.preventDefault();
-          auth.createUserWithEmailAndPassword(email, password).then((user) => {
-            document.getElementById('userEmail').style.display = 'none';
-            document.getElementById('userPassword').style.display = 'none';
-            document.getElementById('signin-button').style.display = 'none';
-            document.getElementById('signup-button').style.display = 'none';
-            document.getElementById('google-button').style.display = 'none';
-            document.getElementById('links').style.display = 'none';
+//       const createUserWithEmailAndPasswordHandler = 
+//       (event, email, password) => {
+//           event.preventDefault();
+//           auth.createUserWithEmailAndPassword(email, password).then((user) => {
+//             document.getElementById('userEmail').style.display = 'none';
+//             document.getElementById('userPassword').style.display = 'none';
+//             document.getElementById('signin-button').style.display = 'none';
+//             document.getElementById('signup-button').style.display = 'none';
+//             document.getElementById('google-button').style.display = 'none';
+//             document.getElementById('links').style.display = 'none';
 
-            document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
-            document.getElementById('signout-button').style.display = 'inline-block';
-          })
-          .catch(error => {
-            setError("Error signing in with password and email!");
-              console.error("Error signing in with password and email", error);
-          });
-};
+//             document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
+//             document.getElementById('signout-button').style.display = 'inline-block';
+//           })
+//           .catch(error => {
+//             setError("Error signing in with password and email!");
+//               console.error("Error signing in with password and email", error);
+//           });
+// };
     const onChangeHandler = (event) => {
         const {name, value} = event.currentTarget;
 
@@ -109,7 +84,7 @@ const SignIn = () => { //Has three pieces of state:
   return (
     <div className="container">
       <h1 id="message">Sign In</h1>
-      <ul id="song"></ul>
+      <button className = "button-email" id="logout-button" onClick = {(event) => {signOutHandler(event)}}>Log out</button>
       <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
         {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
         <form className="">
@@ -141,14 +116,22 @@ const SignIn = () => { //Has three pieces of state:
           }}>
             Sign In
         </button>
+        <Link to="signUp" > 
+            <button type="button" className="button-email" id="signup-button">Sign up</button>
+          </Link>{" "}
 
-        <button className="button-email" id="signup-button" 
+        {/* <button className="button-email" id="signup-button" 
         onClick={(event) => {
           createUserWithEmailAndPasswordHandler(event, email, password)
         }}>
           Sign Up     
-        </button>
-        <button className = "button-email" id="signout-button" onClick = {(event) => {signOutHandler(event)}}>Log out</button>
+        </button> */}
+        {/* <button className = "button-email" id="artists-button" onClick = {this.onArtists}>Artists</button> */}
+        <div className = "button-group">
+          <Link to="Artists" className="button-email" id="artists-button">
+              <button className="button-email" id="artists-button">Artists</button>
+            </Link>{" "}
+          </div> 
         </div>
 
         <button
@@ -164,14 +147,6 @@ const SignIn = () => { //Has three pieces of state:
         </button>
 
         <p className="text-center my-3" id="links">
-          Don't have an account?{" "}
-          {/*Link component that Reach Router provides:similar to the anchor element in HTML, 
-          and similar in function to the href attribute of the anchor element.*/}
-
-
-          <Link to="signUp" className="text-blue-500 hover:text-blue-600" id="signup-link"> 
-            Sign up here
-          </Link>{" "}
           <br />{" "}
           <Link to = "passwordReset" className="text-blue-500 hover:text-blue-600" id="forgotpassword-link">
             Forgot Password?
