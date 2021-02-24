@@ -82,11 +82,12 @@ body {
   display:none;
   background-color: black;
   margin: 10px auto;
-  position: absolute;
-  /* margin-inline: 50px; */
   width: 100px; 
   height: 40px; 
   color: white;
+  position: absolute;
+  top: 20px;
+  right: 20%;
 }
 
 #button-group {
