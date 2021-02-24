@@ -25,23 +25,35 @@ const SignIn = () => { //Has three pieces of state:
                   document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
                   document.getElementById('signout-button').style.display = 'inline-block';
                   const Http = new XMLHttpRequest();
-                  const url='https://v7tzwh82s8.execute-api.us-east-1.amazonaws.com/s3file';
+                  const url='https://tw0uqnivkf.execute-api.us-east-1.amazonaws.com/s3file';
                   Http.open("GET", url);
                   Http.send();
                   Http.onreadystatechange = (e) => {
-                    const obj = JSON.parse(Http.responseText);
-                    // console.log(Http.responseText)
-                    document.getElementById('song').style.display = 'inline-block';
-                    obj.forEach(function (item) {
-                      console.log(item.Key);
-                      var song = document.createElement("LI");
-                      song.innerHTML = item.Key;                 
-                      document.getElementById('song').appendChild(song);
-                    });
-                    document.getElementById('song').style.display = 'inline-block';
-                    // document.getElementById('song').innerHTML = obj[0].Key;
+                    if (Http.readyState == 4) {
+                      console.log("Print once");
+                      const obj = JSON.parse(Http.responseText);
+                      document.getElementById('song').style.display = 'inline-block';
+                      obj.forEach(function (item) {
+                        console.log(item.Key);
+                        var song = document.createElement("LI");
+                        song.innerHTML = item.Key;                 
+                        document.getElementById('song').appendChild(song);
+                      });
+                    }
+                    // const obj = JSON.parse(Http.responseText);
+                    // // console.log(Http.responseText)
+                    // document.getElementById('song').style.display = 'inline-block';
+                    // obj.forEach(function (item) {
+                    //   console.log(item.Key);
+                    //   var song = document.createElement("LI");
+                    //   song.innerHTML = item.Key;                 
+                    //   document.getElementById('song').appendChild(song);
+                    // });
+                    // document.getElementById('song').style.display = 'inline-block';
+                    // // document.getElementById('song').innerHTML = obj[0].Key;
                   }
                 })
+
                 .catch(error => {
                   setError("Error signing in with password and email!");
                     console.error("Error signing in with password and email", error);
