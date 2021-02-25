@@ -41,12 +41,20 @@ const Artists = () => { //Has three pieces of state:
               var songs = [];
               songs = JSON.parse(Http.responseText);
               songs.forEach(function callback(item, index) {
-                var song = document.createElement("BUTTON");
-                song.innerHTML = "Song " + index; 
+                var song = document.createElement("LI");
+                var button = document.createElement("BUTTON");
+                button.innerHTML = "Song " + index;
                 song.id = "Song_" + index;
-                song.onclick = function(){ setAudioPlayer(item); } ;
-                document.getElementById('id-container').appendChild(song);
-                UpdateSongInfo(item, song.id);
+                button.id = "Song_button_" + index;
+                button.className = "song_btn";
+                button.onclick = function(){ setAudioPlayer(item); } ;  
+                document.getElementById('ul-id').appendChild(song);
+                document.getElementById("Song_" + index).appendChild(button);
+                UpdateSongInfo(item, button.id); 
+                // song.innerHTML = "Song " + index; 
+                // song.onclick = function(){ setAudioPlayer(item); } ;
+                // document.getElementById('id-container').appendChild(song);
+                // UpdateSongInfo(item, song.id);
               });
              }
           }
@@ -60,8 +68,6 @@ const Artists = () => { //Has three pieces of state:
       const UpdateSongInfo = (link, songID)  =>  {
         var path = link.split('/');
     
-        // document.getElementById("artist").innerHTML = PathFromUrl(path[1]);
-        // document.getElementById("album").innerHTML = PathFromUrl(path[2]);
         document.getElementById(songID).innerHTML = PathFromUrl(path[5]).split('?')[0];
         console.log(PathFromUrl(path[0]));
         console.log(PathFromUrl(path[1]));
@@ -90,8 +96,9 @@ const Artists = () => { //Has three pieces of state:
                 {error}
             </div>
             )}
-            {/* <button id="song"> </button> */}
+            <ul id="ul-id">
 
+            </ul>
             <ReactAudioPlayer id="mp3-player"
             autoPlay
             controls
