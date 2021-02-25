@@ -114,17 +114,6 @@ body {
   display: inline-block; /* Make the buttons appear below each other */
 }
 
-#song {
-  background-color: red; /* Green background */
-  border: 1px solid black; /* Green border */
-  color: black; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  width: 50%; /* Set a width if needed */
-  display: block; /* Make the buttons appear below each other */
-
-}
-
 .logout-artist-button {
   background-color: black;
   margin: 10px auto;

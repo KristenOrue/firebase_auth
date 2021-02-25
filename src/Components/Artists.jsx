@@ -45,7 +45,7 @@ const Artists = () => { //Has three pieces of state:
                 song.innerHTML = "Song " + index; 
                 song.id = "Song_" + index;
                 song.onclick = function(){ setAudioPlayer(item); } ;
-                document.getElementById('songs').appendChild(song);
+                document.getElementById('id-container').appendChild(song);
                 UpdateSongInfo(item, song.id);
               });
              }
@@ -62,12 +62,13 @@ const Artists = () => { //Has three pieces of state:
     
         // document.getElementById("artist").innerHTML = PathFromUrl(path[1]);
         // document.getElementById("album").innerHTML = PathFromUrl(path[2]);
-        // document.getElementById(songID).innerHTML = 
-        console.log(PathFromUrl[0]);
-        console.log(PathFromUrl[1]);
-        console.log(PathFromUrl[2]);
-        console.log(PathFromUrl[3]);
-        console.log(PathFromUrl[4]);
+        document.getElementById(songID).innerHTML = PathFromUrl(path[5]).split('?')[0];
+        console.log(PathFromUrl(path[0]));
+        console.log(PathFromUrl(path[1]));
+        console.log(PathFromUrl(path[2]));
+        console.log(PathFromUrl(path[3]));
+        console.log(PathFromUrl(path[4]));
+        console.log(PathFromUrl(path[5]).split('?')[0]);
       }
     
      const PathFromUrl = (path)  =>  {
@@ -83,16 +84,15 @@ const Artists = () => { //Has three pieces of state:
         <Link to="/">
             <button type="button" className="logout-artist-button">Log Out</button>
         </Link>
-        <div className="container">
+        <div className="container" id="id-container">
             {error !== null && (
             <div className="error">
                 {error}
             </div>
             )}
-            <button id="songs"> </button>
+            {/* <button id="song"> </button> */}
 
             <ReactAudioPlayer id="mp3-player"
-            // src="my_audio_file.ogg"
             autoPlay
             controls
             />
