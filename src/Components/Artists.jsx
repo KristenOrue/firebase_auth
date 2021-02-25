@@ -6,59 +6,53 @@ import ReactAudioPlayer from 'react-audio-player';
 
 const Artists = () => { //Has three pieces of state:
     const [error, setError] = useState(null);//For displaying error message 
+    var artist_album = {};
+    var album_song = {};
+    var songs = [];
 
-
-    // const Http = new XMLHttpRequest();
-    // const url='https://tw0uqnivkf.execute-api.us-east-1.amazonaws.com/s3file';
-    // Http.open("GET", url);
-    // Http.send();
-
-    // Http.onreadystatechange = (e) => {
-    //   if (Http.readyState == 4) {
-    //     console.log("Print once");
-    //     const obj = JSON.parse(Http.responseText);
-    //     document.getElementById('song').style.display = 'inline-block';
-    //     obj.forEach(function (item) {
-    //       console.log(item.Key);
-    //       var song = document.createElement("BUTTON");
-    //       song.innerHTML = item.Key;                 
-    //       document.getElementById('song').appendChild(song);
-    //     });
-    //   }
-    // }
 
     const handleGetRequest = () => {
         const Http = new XMLHttpRequest();
         const url='https://tw0uqnivkf.execute-api.us-east-1.amazonaws.com/s3file';
         Http.open("GET", url);
         Http.send();
-    
+
         Http.onreadystatechange = (e) => {
           if (Http.readyState == 4 && Http.status == 200)
           {
             if (Http.responseText)
              {
-              var songs = [];
               songs = JSON.parse(Http.responseText);
               songs.forEach(function callback(item, index) {
-                var song = document.createElement("LI");
-                var button = document.createElement("BUTTON");
-                button.innerHTML = "Song " + index;
-                song.id = "Song_" + index;
-                button.id = "Song_button_" + index;
-                button.className = "song_btn";
-                button.onclick = function(){ setAudioPlayer(item); } ;  
-                document.getElementById('ul-id').appendChild(song);
-                document.getElementById("Song_" + index).appendChild(button);
-                UpdateSongInfo(item, button.id); 
-                // song.innerHTML = "Song " + index; 
-                // song.onclick = function(){ setAudioPlayer(item); } ;
-                // document.getElementById('id-container').appendChild(song);
-                // UpdateSongInfo(item, song.id);
+                BuildDirLists(item);
               });
+              setArtistButtons();
              }
           }
         }
+    
+        // Http.onreadystatechange = (e) => {
+        //   if (Http.readyState == 4 && Http.status == 200)
+        //   {
+        //     if (Http.responseText)
+        //      {
+        //       var songs = [];
+        //       songs = JSON.parse(Http.responseText);
+        //       songs.forEach(function callback(item, index) {
+        //         var song = document.createElement("LI");
+        //         var button = document.createElement("BUTTON");
+        //         button.innerHTML = "Song " + index;
+        //         song.id = "Song_" + index;
+        //         button.id = "Song_button_" + index;
+        //         button.className = "song_btn";
+        //         button.onclick = function(){ setAudioPlayer(item); } ;  
+        //         document.getElementById('ul-id').appendChild(song);
+        //         document.getElementById("Song_" + index).appendChild(button);
+        //         UpdateSongInfo(item, button.id); 
+        //       });
+        //      }
+        //   }
+        // }
       }
     
       const setAudioPlayer = (songURL) => {
@@ -83,6 +77,85 @@ const Artists = () => { //Has three pieces of state:
         return path;
       }
 
+      const setSongButtons = (album) => {
+        document.getElementById('albums-container').style.display = 'none';
+    
+        document.getElementById('songs-container').style.display = 'inline-block';
+    
+        var keys = album_song[album];
+        keys.forEach(function callback(item, index) {
+          var song = document.createElement("LI");
+          var button = document.createElement("BUTTON");
+          button.innerHTML = "Song " + index; 
+          song.id = "Song_" + index;
+          button.id = "Song_button_" + index;
+          button.className = "song_btn";
+          button.onclick = function(){ setAudioPlayer(item); } ;   
+          document.getElementById('songs-ul-id').appendChild(song);
+          document.getElementById("Song_" + index).appendChild(button);
+          UpdateSongInfo(item, button.id);
+        });
+      }
+
+      const setAlbumButtons = (artist) => {
+        document.getElementById('artists-container').style.display = 'none';
+    
+        document.getElementById('albums-container').style.display = 'inline-block';
+    
+          var keys = artist_album[artist];
+          keys.forEach(function callback(item, index) {
+            var album = document.createElement("LI");
+            var button = document.createElement("BUTTON");
+            button.innerHTML = "Album " + index; 
+            album.id = "Album_" + index;
+            button.id = "Album_button_" + index;
+            button.className = "album_btn";
+            button.onclick = function(){ setSongButtons(item); } ;   
+            document.getElementById('albums-ul-id').appendChild(album);
+            document.getElementById("Album_" + index).appendChild(button);
+        });
+      }
+
+      const setArtistButtons = () => {
+        var keys = Object.keys(artist_album);
+        keys.forEach(function callback(item, index) {
+          var artist = document.createElement("LI");
+          var button = document.createElement("BUTTON");
+          button.innerHTML = "Artist " + index; 
+          artist.id = "Artist_" + index;
+          button.id = "Artist_button_" + index;
+          button.className = "artist_btn";
+          button.onclick = function(){ setAlbumButtons(item); } ;   
+          document.getElementById('artists-ul-id').appendChild(artist);
+          document.getElementById("Artist_" + index).appendChild(button);
+      });
+    }
+
+      const BuildDirLists = (link) => {
+        var path = link.split('/');
+        var song = link;
+        // console.log(ParseUrl(path[4]));
+        var album = PathFromUrl(path[4]);
+        var artist = PathFromUrl(path[3]);
+    
+        if (artist in artist_album){
+          artist_album[artist].push(album);
+          
+        }else {
+          artist_album[artist] = [];
+          artist_album[artist].push(album);
+        }
+        
+        if (album in album_song){
+          album_song[album].push(song);
+          
+        } else{
+          album_song[album] = [];
+          album_song[album].push(song);
+        } 
+        
+      }
+
     return (
         <div className="">
         <h1 className="text">Artists</h1>
@@ -96,13 +169,38 @@ const Artists = () => { //Has three pieces of state:
                 {error}
             </div>
             )}
-            <ul id="ul-id">
+            {/* <h1 className="header-text">Title</h1> */}
 
-            </ul>
-            <ReactAudioPlayer id="mp3-player"
-            autoPlay
-            controls
-            />
+            {/* Songs Container */}
+            <div id= "songs-container">
+              <ul id="songs-ul-id"></ul>
+              <ReactAudioPlayer id="mp3-player"
+              autoPlay
+              controls
+              />
+            </div>
+
+              {/* Albums Container */}
+            <div id= "albums-container">
+              <ul id="albums-ul-id"></ul>
+            </div>
+
+            {/* Artists Container */}
+            <div id= "artists-container">
+              <ul id="artists-ul-id"></ul>
+            </div>
+        </div>
+
+        <div className="container2" id="id-container">
+            {error !== null && (
+            <div className="error">
+                {error}
+            </div>
+            )}
+            <div id= "albums-container">
+              <ul id="albums-ul-id"></ul>
+            </div>
+
         </div>
         </div>
     );
