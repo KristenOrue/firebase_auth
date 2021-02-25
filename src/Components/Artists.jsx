@@ -77,10 +77,9 @@ const Artists = () => { //Has three pieces of state:
         return path;
       }
 
-      const setSongButtons = (album) => {
-        document.getElementById('albums-container').style.display = 'none';
-    
+      const setSongButtons = (album) => {    
         document.getElementById('songs-container').style.display = 'inline-block';
+        document.getElementById('mp3-player').style.display = 'inline-block';
     
         var keys = album_song[album];
         keys.forEach(function callback(item, index) {
@@ -98,8 +97,7 @@ const Artists = () => { //Has three pieces of state:
       }
 
       const setAlbumButtons = (artist) => {
-        document.getElementById('artists-container').style.display = 'none';
-    
+        document.getElementById('artists-container').style.display = 'none';  
         document.getElementById('container2-id').style.display = 'inline-block';
     
           var keys = artist_album[artist];
@@ -111,12 +109,14 @@ const Artists = () => { //Has three pieces of state:
             button.id = "Album_button_" + index;
             button.className = "album_btn";
             button.onclick = function(){ setSongButtons(item); } ;   
-            document.getElementById('container2-id').appendChild(album);
+            document.getElementById('albums-ul-id').appendChild(album);
             document.getElementById("Album_" + index).appendChild(button);
         });
       }
 
       const setArtistButtons = () => {
+        document.getElementById('mp3-player').style.display = 'none';
+        
         var keys = Object.keys(artist_album);
         keys.forEach(function callback(item, index) {
           var artist = document.createElement("LI");
@@ -179,9 +179,9 @@ const Artists = () => { //Has three pieces of state:
             </div>
 
               {/* Albums Container */}
-            <div id= "albums-container">
+            {/* <div id= "albums-container">
               <ul id="albums-ul-id"></ul>
-            </div>
+            </div> */}
 
             {/* Artists Container */}
             <div id= "artists-container">
