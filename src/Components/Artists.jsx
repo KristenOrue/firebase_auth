@@ -100,7 +100,7 @@ const Artists = () => { //Has three pieces of state:
       const setAlbumButtons = (artist) => {
         document.getElementById('artists-container').style.display = 'none';
     
-        document.getElementById('albums-container').style.display = 'inline-block';
+        document.getElementById('container2-id').style.display = 'inline-block';
     
           var keys = artist_album[artist];
           keys.forEach(function callback(item, index) {
@@ -111,7 +111,7 @@ const Artists = () => { //Has three pieces of state:
             button.id = "Album_button_" + index;
             button.className = "album_btn";
             button.onclick = function(){ setSongButtons(item); } ;   
-            document.getElementById('albums-ul-id').appendChild(album);
+            document.getElementById('container2-id').appendChild(album);
             document.getElementById("Album_" + index).appendChild(button);
         });
       }
@@ -169,8 +169,6 @@ const Artists = () => { //Has three pieces of state:
                 {error}
             </div>
             )}
-            {/* <h1 className="header-text">Title</h1> */}
-
             {/* Songs Container */}
             <div id= "songs-container">
               <ul id="songs-ul-id"></ul>
@@ -191,16 +189,10 @@ const Artists = () => { //Has three pieces of state:
             </div>
         </div>
 
-        <div className="container2" id="id-container">
-            {error !== null && (
-            <div className="error">
-                {error}
-            </div>
-            )}
+        <div className="container2" id="container2-id">
             <div id= "albums-container">
               <ul id="albums-ul-id"></ul>
             </div>
-
         </div>
         </div>
     );
