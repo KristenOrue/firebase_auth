@@ -49,6 +49,14 @@ const Songs = () => { //Has three pieces of state:
             controls
             />
         </div>
+
+        <div className="container2">
+            {error !== null && (
+            <div className="error">
+                {error}
+            </div>
+            )}
+        </div>
         </div>
     );
 };
