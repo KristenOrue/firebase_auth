@@ -3,7 +3,6 @@ import { Router ,Redirect, Switch} from "@reach/router";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Artists from "./Artists";
-import Songs from "./Songs";
 import UserProvider from "../providers/UserProvider";
 import ProfilePage from "./ProfilePage";
 import { UserContext } from "../providers/UserProvider";
@@ -22,8 +21,6 @@ function Application() {
           <SignIn path="/" />
           <Redirect from='/SignIn' to="/Artists" />
           <Artists path = "Artists" />
-          <Redirect from='/SignIn' to="/Songs" />
-          <Songs path = "Songs"/>
           <PasswordReset path = "passwordReset" />
         </Router>
       

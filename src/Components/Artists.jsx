@@ -60,8 +60,7 @@ const Artists = () => { //Has three pieces of state:
       }
     
       const UpdateSongInfo = (link, songID)  =>  {
-        var path = link.split('/');
-    
+        var path = link.split('/');  
         document.getElementById(songID).innerHTML = PathFromUrl(path[5]).split('?')[0];
         console.log(PathFromUrl(path[0]));
         console.log(PathFromUrl(path[1]));
@@ -177,11 +176,6 @@ const Artists = () => { //Has three pieces of state:
               controls
               />
             </div>
-
-              {/* Albums Container */}
-            {/* <div id= "albums-container">
-              <ul id="albums-ul-id"></ul>
-            </div> */}
 
             {/* Artists Container */}
             <div id= "artists-container">

@@ -25,7 +25,7 @@ const SignIn = () => { //Has three pieces of state:
                   document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
                   document.getElementById('logout-button').style.display = 'inline-block';
                   document.getElementById('artists-button').style.display = 'inline-block';
-                  document.getElementById('songs-button').style.display = 'inline-block';
+                  // document.getElementById('songs-button').style.display = 'inline-block';
 
                 })
 
@@ -50,29 +50,30 @@ const SignIn = () => { //Has three pieces of state:
           alert("Signed Out Successfully");
           document.getElementById('logout-button').style.display = 'none';
           document.getElementById('artists-button').style.display = 'none';
-          document.getElementById('songs-button').style.display = 'none';
+          // document.getElementById('songs-button').style.display = 'none';
 
         });
       }
-//       const createUserWithEmailAndPasswordHandler = 
-//       (event, email, password) => {
-//           event.preventDefault();
-//           auth.createUserWithEmailAndPassword(email, password).then((user) => {
-//             document.getElementById('userEmail').style.display = 'none';
-//             document.getElementById('userPassword').style.display = 'none';
-//             document.getElementById('signin-button').style.display = 'none';
-//             document.getElementById('signup-button').style.display = 'none';
-//             document.getElementById('google-button').style.display = 'none';
-//             document.getElementById('links').style.display = 'none';
+      const createUserWithEmailAndPasswordHandler = 
+      (event, email, password) => {
+          event.preventDefault();
+          auth.createUserWithEmailAndPassword(email, password).then((user) => {
+            document.getElementById('userEmail').style.display = 'none';
+            document.getElementById('userPassword').style.display = 'none';
+            document.getElementById('signin-button').style.display = 'none';
+            document.getElementById('signup-button').style.display = 'none';
+            document.getElementById('google-button').style.display = 'none';
+            document.getElementById('links').style.display = 'none';
 
-//             document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
-//             document.getElementById('signout-button').style.display = 'inline-block';
-//           })
-//           .catch(error => {
-//             setError("Error signing in with password and email!");
-//               console.error("Error signing in with password and email", error);
-//           });
-// };
+            document.getElementById('message').innerHTML = "WELCOME\n" + "" + document.getElementById('userEmail').value;
+            document.getElementById('logout-button').style.display = 'inline-block';
+            document.getElementById('artists-button').style.display = 'inline-block';
+          })
+          .catch(error => {
+            setError("Error signing in with password and email!");
+              console.error("Congratulations on your Sign Up!", error);
+          });
+};
     const onChangeHandler = (event) => {
         const {name, value} = event.currentTarget;
 
@@ -120,9 +121,15 @@ const SignIn = () => { //Has three pieces of state:
           }}>
             Sign In
         </button>
-        <Link to="signUp" > 
+
+        <button className="button-email" id="signup-button"
+        onClick = {(event) => {
+          createUserWithEmailAndPasswordHandler(event, email, password)
+          }}>Sign up</button>
+
+        {/* <Link to="signUp" > 
             <button type="button" className="button-email" id="signup-button">Sign up</button>
-          </Link>{" "}
+          </Link>{" "} */}
 
         {/* <button className="button-email" id="signup-button" 
         onClick={(event) => {
@@ -135,9 +142,9 @@ const SignIn = () => { //Has three pieces of state:
           <Link to="/Artists" className="button-email">
               <button type="button" className="button-email" id="artists-button">Artists</button>
             </Link>{" "}
-          <Link to="/Songs" className="button-email">
+          {/* <Link to="/Songs" className="button-email">
               <button type="button" className="button-email" id="songs-button">Songs</button>
-            </Link>{" "}
+            </Link>{" "} */}
           </div> 
         </div>
 

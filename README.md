@@ -1,8 +1,31 @@
 My reference for code Base: https://blog.logrocket.com/user-authentication-firebase-react-apps/
+# Autho: Kristen Orue 
+# Meusick app is finally here! The Music streaming app of your dreams
+
+# To get started please go to:
+
+https://notes-auth-fdebd.web.app/
+
+# Enter an email and a password of your choice and click: "Sign Up"
+
+You have now created an account!
+
+# Click "Artists" which will lead you to the Albums page and then to songs
+
+Once in the songs page, click the song you want to here and click "play" 
+
+# You're welcome
+
+# Log out whe you are done playing 
+
+
+
+
+
 
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was...barely bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
