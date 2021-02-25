@@ -18,7 +18,7 @@ const Songs = () => { //Has three pieces of state:
         const obj = JSON.parse(Http.responseText);
         console.log(obj);
         document.getElementById('song').style.display = 'inline-block';
-        document.getElementById('mp3-player').src=obj[12];
+        document.getElementById('mp3-player').src=obj[5];
         obj.forEach(function (item) {
           console.log(item.Key);
           var song = document.createElement("BUTTON");
@@ -44,7 +44,7 @@ const Songs = () => { //Has three pieces of state:
             <button id="song"> </button>
 
             <ReactAudioPlayer id="mp3-player"
-            src="my_audio_file.ogg"
+            // src="my_audio_file.ogg"
             autoPlay
             controls
             />
