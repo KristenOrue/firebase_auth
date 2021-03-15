@@ -13,7 +13,7 @@ const Artists = () => { //Has three pieces of state:
 
     const handleGetRequest = () => {
         const Http = new XMLHttpRequest();
-        const url='https://tw0uqnivkf.execute-api.us-east-1.amazonaws.com/s3file';
+        const url='https://51m3io1laj.execute-api.us-east-1.amazonaws.com/s3file';
         Http.open("GET", url);
         Http.send();
 
