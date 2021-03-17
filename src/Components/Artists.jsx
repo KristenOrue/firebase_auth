@@ -76,7 +76,8 @@ const Artists = () => { //Has three pieces of state:
         return path;
       }
 
-      const setSongButtons = (album) => {    
+      const setSongButtons = (album, artist) => {  
+
         document.getElementById('songs-container').style.display = 'inline-block';
         document.getElementById('mp3-player').style.display = 'inline-block';
     
@@ -88,7 +89,17 @@ const Artists = () => { //Has three pieces of state:
           song.id = "Song_" + index;
           button.id = "Song_button_" + index;
           button.className = "song_btn";
-          button.onclick = function(){ setAudioPlayer(item); sendRequest("artist", "album", "song")} ;   
+          button.onclick = function(){ 
+            setAudioPlayer(item); 
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://que4qks7g5.execute-api.us-east-1.amazonaws.com/dev/play", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                artist: artist,
+                album: album,
+                song: index
+            }));
+          } ;     
           document.getElementById('songs-ul-id').appendChild(song);
           document.getElementById("Song_" + index).appendChild(button);
           UpdateSongInfo(item, button.id);
@@ -155,24 +166,23 @@ const Artists = () => { //Has three pieces of state:
         
       }
 
-      function sendRequest (artist, album, song) {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+      // function sendRequest (artist, album, song) {
+      //   var myHeaders = new Headers();
+      //   myHeaders.append("Content-Type", "application/json");
       
-        var raw = JSON.stringify({"artist":artist,"album":album,"song":song});
+      //   var raw = JSON.stringify({"artist":artist,"album":album,"song":song});
       
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-          mode: "no-cors"
-        };
-      
-        fetch("https://que4qks7g5.execute-api.us-east-1.amazonaws.com/dev/play", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error', error));
-      }
+      //   var requestOptions = {
+      //     method: 'POST',
+      //     headers: myHeaders,
+      //     body: raw,
+      //     mode: "no-cors"
+      //   };
+      //   fetch("https://que4qks7g5.execute-api.us-east-1.amazonaws.com/dev/play", requestOptions)
+      //     .then(response => response.text())
+      //     .then(result => console.log(result))
+      //     .catch(error => console.log('error', error));
+      // }
 
     return (
         <div className="">
