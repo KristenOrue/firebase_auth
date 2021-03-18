@@ -80,7 +80,7 @@ const Artists = () => { //Has three pieces of state:
 
         document.getElementById('songs-container').style.display = 'inline-block';
         document.getElementById('mp3-player').style.display = 'inline-block';
-    
+        console.log("This is the message we want #{artist}");
         var keys = album_song[album];
         keys.forEach(function callback(item, index) {
           var song = document.createElement("LI");
@@ -97,7 +97,7 @@ const Artists = () => { //Has three pieces of state:
             xhr.send(JSON.stringify({
                 artist: artist,
                 album: album,
-                song: index
+                song: "Song " + index
             }));
           } ;     
           document.getElementById('songs-ul-id').appendChild(song);
@@ -118,7 +118,7 @@ const Artists = () => { //Has three pieces of state:
             album.id = "Album_" + index;
             button.id = "Album_button_" + index;
             button.className = "album_btn";
-            button.onclick = function(){ setSongButtons(item); } ;   
+            button.onclick = function(){ setSongButtons(item, artist); } ;   
             document.getElementById('albums-ul-id').appendChild(album);
             document.getElementById("Album_" + index).appendChild(button);
         });
