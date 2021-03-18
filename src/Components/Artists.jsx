@@ -93,7 +93,8 @@ const Artists = () => { //Has three pieces of state:
             setAudioPlayer(item); 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "https://que4qks7g5.execute-api.us-east-1.amazonaws.com/dev/play", true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
+            // xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('authorization', 'authorization');
             xhr.send(JSON.stringify({
                 artist: artist,
                 album: album,
