@@ -13,8 +13,9 @@ const Artists = () => { //Has three pieces of state:
 
     const handleGetRequest = () => {
         const Http = new XMLHttpRequest();
-        const url='https://51m3io1laj.execute-api.us-east-1.amazonaws.com/s3file';
+        const url='https://im7wz9nsjf.execute-api.us-east-1.amazonaws.com/s3file';
         Http.open("GET", url);
+        console.log("WE made it here")
         Http.send();
 
         Http.onreadystatechange = (e) => {
@@ -92,8 +93,8 @@ const Artists = () => { //Has three pieces of state:
           button.onclick = function(){ 
             setAudioPlayer(item); 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "https://que4qks7g5.execute-api.us-east-1.amazonaws.com/dev/play", true);
-            // xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.open("POST", "https://4thvnai6w2.execute-api.us-east-1.amazonaws.com/dev/play", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.setRequestHeader('authorization', 'authorization');
             xhr.send(JSON.stringify({
                 artist: artist,
